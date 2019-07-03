@@ -1,0 +1,639 @@
+@charset "utf-8";
+
+// ===================================================================
+// メイン - このファイルにメインコンテンツ部分のスタイルをガツガツ書いていく。
+// ===================================================================
+
+/*----------------------------------------------------
+	element style
+----------------------------------------------------*/
+html{
+	font-size:62.5%;
+}
+body {
+	background: #fff;
+	color: $font_color;
+	font-family: $base_font;
+}
+
+
+// リンク
+a {
+	&:link {
+		color: $link_color;
+		text-decoration: none;
+	}
+	&:visited {
+		color: $link_color_visited;
+	}
+	&:hover {
+		color: $link_color_hover;
+		text-decoration: underline;
+	}
+	&:active {
+		color: $link_color_active;
+	}
+}
+
+img {
+	line-height: 1;
+	font-size: 0;
+	vertical-align: top;
+	height: auto;
+	max-width:100%;
+}
+
+/*----------------------------------------------------
+	テーブル共通指定
+--------------------------------------------------- */
+table {
+	width: 100%;
+	margin: 0 auto 20px;
+	border-collapse: collapse;
+}
+th, td {
+	font-weight: normal;
+	padding: 10px;
+	border-bottom: 1px dotted #ddd;
+	vertical-align: top;
+}
+
+
+// レイアウト関係のスタイル読み込み
+@import "layout";
+
+
+/*----------------------------------------------------
+	#main
+----------------------------------------------------*/
+#main {
+	line-height: 180%;
+	table, ol, ul, dl, blockquote, pre, p {
+		margin-bottom: $base_margin_bottom;
+	}
+}
+
+section{
+	margin-bottom:40px;
+}
+
+.loading{
+	background: #FFF;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+.loadingAnim {
+  width: 55px;
+  margin: 0 auto;
+  top: 45%;
+  position: relative;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  div {
+    display: inline-block;
+    background-color: #0088d0;
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    padding: 0;
+  }
+  .box1 {
+    -webkit-animation: loadingAnim-box1 1.5s infinite;
+    animation: loadingAnim-box1 2s infinite;
+  }
+  .box2 {
+    -webkit-animation: loadingAnim-box2 1.5s infinite;
+    animation: loadingAnim-box2 2s infinite;
+  }
+  .box3 {
+    -webkit-animation: loadingAnim-box3 1.5s infinite;
+    animation: loadingAnim-box3 2s infinite;
+  }
+  .box4 {
+    -webkit-animation: loadingAnim-box4 1.5s infinite;
+    animation: loadingAnim-box4 2s infinite;
+  }
+}
+
+@keyframes loadingAnim-box1
+{
+  40%
+  {
+      transform: translate(-25px, -25px) rotate(85deg);
+  }
+  50%
+  {
+
+      transform: translate(-25px, -25px) rotate(90deg);
+  }
+  100%
+  {
+      transform: translate(-0px, -0px) rotate(180deg);
+  }
+}
+
+
+@keyframes loadingAnim-box2
+{
+  40%
+  {
+      transform: translate(50px, -25px) rotate(85deg);
+  }
+  50%
+  {
+      transform: translate(50px, -25px) rotate(90deg);
+  }
+  100%
+  {
+      transform: translate(-0px, -0px) rotate(180deg);
+  }
+}
+
+@keyframes loadingAnim-box3
+{
+  40%
+  {
+      transform: translate(-50px, 25px) rotate(85deg);
+  }
+  50%
+  {
+      transform: translate(-50px, 25px) rotate(90deg);
+  }
+  100%
+  {
+      transform: translate(-0px, -0px) rotate(180deg);
+  }
+}
+
+
+@keyframes loadingAnim-box4
+{
+  40%
+  {
+      transform: translate(25px, 25px) rotate(85deg);
+  }
+  50%
+  {
+      transform: translate(25px, 25px) rotate(90deg);
+  }
+  100%
+  {
+      transform: translate(-0px, -0px) rotate(180deg);
+  }
+}
+/*----------------------------------------------------
+	各ページのスタイル
+----------------------------------------------------*/
+
+/* トップページ */
+
+#index{
+	section{
+		margin-bottom: 80px;
+	}
+	#sec01{
+		.animationElm{
+			position: relative;
+			top: 30px;
+			@include opacity(0);
+			@include transition(all 1s ease);
+			&.tbl{
+				left: -30px;
+				&.active{
+					left: 0;
+				}
+			}
+			&.aboutImg{
+				right: -30px;
+				&.active{
+					right: 0;
+				}
+			}
+			&.active{
+				top: 0;
+				@include opacity(0.8);
+			}
+		}
+	}
+	#sec02{
+		h3{
+			i{
+				@include font-size(2.5);
+			}
+		}
+		.animationElm{
+			position: relative;
+			top: 30px;
+			@include opacity(0);
+			@include transition(all 1s ease);
+			&.active{
+				top: 0;
+				@include opacity(0.8);
+			}
+		}
+		.skilList{
+			text-align: center;
+			li{
+				margin: 0 0 3%;
+				span{
+					@include inline-block;
+					width: 140px;
+					line-height: 140px;
+					text-align: center;
+				}
+				i{
+					@include font-size(8);
+					vertical-align: middle;
+				}
+			}
+		}
+	}
+	#sec03{
+		.worksArea{
+			li{
+				&.animationElm{
+					position: relative;
+					top: -30px;
+					@include opacity(0);
+					@include transition(all 1s ease);
+					margin-bottom: 30px;
+					&.active{
+						top: 0;
+						@include opacity(0.8);
+					}
+				}
+				a{
+					position: relative;
+					@include inline-block;
+					color: #fff;
+					img{
+						width: 100%;
+						@include transition(all 0.5s ease);
+					}
+					&:hover{
+						img{
+							@include filter(grayscale(50%));
+							@include filter(blur(3px));
+						}
+
+					}
+					span{
+						@include opacity(0);
+						position: absolute;
+						width: 100%;
+						height: auto;
+					  top: 50%;
+					  left: 0;
+					  text-align: center;
+					  @include font-size(1.2);
+					  @include transition(all 0.5s ease);
+					  background: rgba(0,119,195,0.8);
+					  padding: 10px 0;
+					  &.active{
+					  	@include opacity(1);
+					  	top: 46%;
+					  }
+					}
+				}
+			}
+		}
+	}
+	#sec04{
+		#form{
+			max-width: 600px;
+		}
+	}
+}
+
+
+#works{
+	padding: 50px;
+	.imgThum{
+	  overflow-y: scroll;
+	  max-height: 300px;
+	}
+	.worksBody{
+		padding-top: 30px;
+		dl{
+			dt{
+				color: $main_color;
+				@include font-size(2);
+				margin-bottom: 20px;
+			}
+			dd{
+				line-height: 2;
+			}
+		}
+	}
+}
+
+/* プライバシーポリシー */
+
+#privacy{
+	margin:20px 0;
+	ol{
+		padding-left: 25px;
+	}
+}
+
+
+/* 404 notfound */
+
+#notfound {
+	text-align: center;
+	position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 40%;
+  left: 0;
+  color: #FFF;
+	ul{
+		margin-bottom: 30px;
+	}
+}
+
+.bgWhite{
+	color: $font_color;
+  background: rgba(255,255,255,.7);
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  text-align: center;
+  padding: 5%;
+  h3{
+  	border-bottom: 1px solid $main_color;
+  	border-top: 1px solid $main_color;
+  	@include font-size(2);
+  	margin: 30px;
+  	padding: 10px 20px;
+  	@include inline-block;
+  }
+  p{
+  	margin-bottom: 20px;
+  }
+}
+
+
+/*----------------------------------------------------
+	form要素
+--------------------------------------------------- */
+input, textarea {
+	padding:5px 7px;
+	border-radius:2px;
+	margin:0;
+	border:none;
+	background-color:#fff;
+	border: 1px solid #A7A6AA;
+	width: 100%;
+}
+.jInput {
+	border: 1px solid #A7A6AA;
+}
+.jFocus {
+	outline: medium none !important;
+	background-color: #fff !important;
+	border-color: #6ddeff !important;
+}
+.jFocus {
+	box-shadow: 0 0 3px rgba(82, 168, 236, 0.5);
+	-webkit-box-shadow: 0 0 3px rgba(82, 168, 236, 0.5);
+	-moz-box-shadow: 0 0 3px rgba(82, 168, 236, 0.5);
+	-ms-box-shadow: 0 0 3px rgba(82, 168, 236, 0.5);
+	-o-box-shadow: 0 0 3px rgba(82, 168, 236, 0.5);
+	border-color: rgba(82, 168, 236, 0.75) !important;
+}
+input[type="radio"], input[type="checkbox"] {
+	margin-right:5px;
+	vertical-align:baseline;
+	border-style:none;
+}
+label {
+	margin-right:15px;
+}
+
+/*----------------------------------------------------
+	ページ分割ナビ
+--------------------------------------------------- */
+#main .wp-pagenavi {
+	padding: 20px 0 40px;
+	text-align: center;
+	overflow: hidden;
+
+		a, span {
+		padding:3px 8px;
+		background:#ccc;
+		color:$font_color;
+		margin-right: 5px;
+		text-decoration: none;
+		border-radius:3px;
+		@extend .inline_block;
+	}
+
+	span {
+		background:#333;
+		color:#fff;
+	}
+
+	 .pages {
+		background:#333;
+		color: #fff;
+		margin-right: 20px;
+	}
+
+	a:hover {
+		background:#333;
+		color:#fff;
+	}
+
+	.alignleft {
+		margin-top:0;
+		margin-bottom:0;
+		float:none;
+		@extend .inline_block;
+	}
+
+	.center {
+		margin-top:0;
+		margin-bottom:0;
+		float:none;
+		@extend .inline_block;
+	}
+
+	.alignright {
+		margin-top:0;
+		margin-bottom:0;
+		float:none;
+		@extend .inline_block;
+	}
+}
+
+
+/*----------------------------------------------------
+  送信確認ボタン
+--------------------------------------------------- */
+#main .check_btn{
+	background:url(../img/buttons/btn_confirm.jpg);
+	padding:0;
+	height:$submit_height;
+	width:$submit_width;
+	text-indent:-9999px;
+	border:none;
+	display:block;
+	margin:20px auto;
+
+	&:hover{
+		background:url(../img/buttons/btn_confirm_on.jpg);
+		padding:0;
+		height:$submit_height;
+		width:$submit_width;
+		text-indent:-9999px;
+	}
+}
+
+/*----------------------------------------------------
+  送信ボタン
+--------------------------------------------------- */
+
+.btnarea{
+	padding:20px 0;
+	text-align:center;
+}
+
+.submitBtn{
+	text-align: center;
+	input{
+		padding:0;
+		height:$submit_height;
+		width:$submit_width;
+		border:none;
+		background: $main_color;
+		color: #FFF;
+		@include transition(all 0.5s ease);
+		&:hover{
+			border: 1px solid $main_color;
+			color: $main_color;
+			background:#fff;
+			padding:0;
+			height:$submit_height;
+			width:$submit_width;
+		}
+	}
+}
+/*----------------------------------------------------
+  戻るボタン
+--------------------------------------------------- */
+
+#main .return{
+	background:url(../img/buttons/btn_return.jpg);
+	padding:0;
+	height:$submit_height;
+	width:$submit_width;
+	text-indent:-9999px;
+	border:none;
+
+	&:hover{
+		background:url(../img/buttons/btn_return_on.jpg);
+		padding:0;
+		height:$submit_height;
+		width:$submit_width;
+		text-indent:-9999px;
+	}
+}
+/*----------------------------------------------------
+  完了画面のdiv
+--------------------------------------------------- */
+#main .form_complete{
+	margin:20px auto;
+	padding:20px 30px;
+
+	h3{
+		padding:13px 0 15px 0;
+		color:#834523;
+		font-family:ume_m,"ＭＳ Ｐ明朝", "MS PMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", serif;
+		font-size:220%;
+		font-weight:600;
+	}
+
+	p{
+		margin:20px 0;
+	}
+}
+
+/*----------------------------------------------------
+  完了画面のトップへ戻るボタン
+--------------------------------------------------- */
+
+.returnTop{
+	background: $main_color;
+	color: #FFF;
+	padding:0;
+	height: $submit_height;
+	width: $submit_width;
+	border:none;
+	display:block;
+	margin:20px auto;
+	text-align: center;
+	&:hover{
+		color: $main_color;
+		background:#fff;
+		padding:0;
+		height: $submit_height;
+		width: $submit_width;
+		text-indent:-9999px;
+	}
+}
+/*----------------------------------------------------
+  必須
+--------------------------------------------------- */
+
+#main th span.kome{
+	margin-left:10px;
+	color:$main_color;
+	padding:3px 4px;
+	@include font-size(1.4);
+	letter-spacing:1px;
+  margin: 0px 0px 0px 10px;
+	line-height:9px;
+	border-radius:3px;
+	font-family:$base_font;
+	zoom:normal;
+}
+
+/*-------------------------------------
+    メディアクエリ用
+--------------------------------------*/
+
+//デバイス定義
+$type: xs sm md lg;
+//media-query.scssをインポート。
+@import "media-query";
+
+/* スマホ
+-------------------------------------------------- */
+@media only screen and (max-width:767px) {
+ $type: xs;
+ @import "media-query"
+}
+/* タブレット
+-------------------------------------------------- */
+@media only screen and (min-width:768px) and (max-width:991px) {
+ $type: sm;
+ @import "media-query"
+}
+/* PC(small)
+-------------------------------------------------- */
+@media only screen and (min-width:992px) and (max-width:1169px) {
+ $type: md;
+ @import "media-query"
+}
+/* PC(large)
+-------------------------------------------------- */
+@media only screen and (min-width:1170px) {
+ $type: lg;
+ @import "media-query"
+}

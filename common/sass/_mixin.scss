@@ -1,0 +1,404 @@
+@charset "utf-8";
+// ===================================================================
+// mixinやらCSS3やら、extendも。
+// ===================================================================
+@import "compass";
+
+// border-radius
+@mixin border_radius($br_value) {
+	@each $prefix in $set_prefix {
+		#{$prefix}border-radius: $br_value;
+	}
+}
+
+@mixin module-triangle($size: 8px, $color: #000, $side: top, $position: 50%, $direction: regular) {
+  position: relative;
+  &::before {
+    content: "";
+    border: solid transparent;
+    display: inline-block;
+    position: absolute;
+    border-width: $size;
+    @if $direction == reverse {
+      @if $side == top {
+        border-bottom-color: $color;
+        margin-left: -$size;
+        left: $position;
+        bottom: -($size * 2);
+      }
+      @elseif $side == right {
+        border-left-color: $color;
+        margin-top: -$size;
+        left: -($size * 2);
+        top: $position;
+      }
+      @elseif $side == bottom {
+        border-top-color: $color;
+        margin-left: -$size;
+        left: $position;
+        top: -($size * 2);
+      }
+      @else {
+        border-right-color: $color;
+        margin-top: -$size;
+        right: -($size * 2);
+        top: $position;
+      }
+    }
+    @else {
+      @if $side == top {
+        border-bottom-color: $color;
+        margin-left: -$size;
+        left: $position;
+        top: -($size * 2);
+      }
+      @elseif $side == right {
+        border-left-color: $color;
+        margin-top: -$size;
+        right: -($size * 2);
+        top: $position;
+      }
+      @elseif $side == bottom {
+        border-top-color: $color;
+        margin-left: -$size;
+        left: $position;
+        bottom: -($size * 2);
+      }
+      @else {
+        border-right-color: $color;
+        margin-top: -$size;
+        left: -($size * 2);
+        top: $position;
+      }
+    }
+  }
+}
+
+@mixin module-circle($size: 8px, $color: #000, $position: 50%) {
+  position: relative;
+  &::before {
+    content: "";
+    border: solid transparent;
+    display: inline-block;
+    position: absolute;
+    background: $color;
+    height:$size;
+    width:$size;
+    top: ($position / 2);
+    margin-top: $size;
+    left: -($size * 3);
+    border-radius: $size;
+    -webkit-border-radius: $size;
+    -moz-border-radius: $size;
+  }
+}
+
+@mixin gradient-top-lighten($color:#666, $lighten:10%){
+  background-color: $color;
+  @include filter-gradient(lighten($color, $lighten), $color, vertical);
+  @include background-image(linear-gradient(lighten($color, $lighten) 0%, $color 100%));
+}
+
+@mixin gradient-top-darken($color:#666, $darken:10%){
+  background-color: $color;
+  @include filter-gradient(darken($color, $darken), $color, vertical);
+  @include background-image(linear-gradient(darken($color,  $darken) 0%, $color 100%));
+}
+
+@mixin easing($time){
+		-webkit-transition-property:all;
+			 -moz-transition-property:all;
+			 	-ms-transition-property:all;
+				 -o-transition-property:all;
+						transition-property:all;	
+		-webkit-transition-duration:$time;		
+			 -moz-transition-duration:$time;
+				-ms-transition-duration:$time;
+				 -o-transition-duration:$time;
+						transition-duration:$time;	
+		-webkit-transition-timing-function:ease;		
+			 -moz-transition-timing-function:ease;
+				-ms-transition-timing-function:ease;
+				 -o-transition-timing-function:ease;
+						transition-timing-function:ease;			
+}
+@mixin ease_in_out($time){
+		-webkit-transition-property:all;
+			 -moz-transition-property:all;
+			 	-ms-transition-property:all;
+				 -o-transition-property:all;
+						transition-property:all;	
+		-webkit-transition-duration:$time;		
+			 -moz-transition-duration:$time;
+				-ms-transition-duration:$time;
+				 -o-transition-duration:$time;
+						transition-duration:$time;	
+		-webkit-transition-timing-function:ease-in-out;		
+			 -moz-transition-timing-function:ease-in-out;
+				-ms-transition-timing-function:ease-in-out;
+				 -o-transition-timing-function:ease-in-out;
+						transition-timing-function:ease-in-out;			
+}
+@mixin easeout($duration){
+	-webkit-transition: all $duration cubic-bezier(0.165, 0.840, 0.440, 1.000); 
+	   -moz-transition: all $duration cubic-bezier(0.165, 0.840, 0.440, 1.000); 
+	     -o-transition: all $duration cubic-bezier(0.165, 0.840, 0.440, 1.000); 
+	        transition: all $duration cubic-bezier(0.165, 0.840, 0.440, 1.000); /* easeOutQuart */
+
+-webkit-transition-timing-function: cubic-bezier(0.165, 0.840, 0.440, 1.000); 
+   -moz-transition-timing-function: cubic-bezier(0.165, 0.840, 0.440, 1.000); 
+     -o-transition-timing-function: cubic-bezier(0.165, 0.840, 0.440, 1.000); 
+        transition-timing-function: cubic-bezier(0.165, 0.840, 0.440, 1.000); /* easeOutQuart */
+}
+@mixin transform($param){
+	
+	-webkit-transform: $param;
+	   -moz-transform: $param;
+		-ms-transform: $param;	
+		    transform: $param;
+}
+
+//テキストシャドウ
+$DEFAULT_box_shadow: 0px -10px 10px #ff0000, 10px 10px 10px #00ff00, -10px 10px 10px #0000ff !default;
+@mixin box-shadow($value...) {
+    @if(not existed($value...)) {
+        $value: $DEFAULT_box_shadow;
+    }
+  -webkit-box-shadow: $value;
+     -moz-box-shadow: $value;
+      -ms-box-shadow: $value;
+          box-shadow: $value;
+}
+
+//ボックスシャドウ
+$DEFAULT_box_shadow: 0px -10px 10px #ff0000, 10px 10px 10px #00ff00, -10px 10px 10px #0000ff !default;
+@mixin text-shadow($value...) {
+    @if(not existed($value...)) {
+        $value: $DEFAULT_text_shadow;
+    }
+  -webkit-text-shadow: $value;
+     -moz-text-shadow: $value;
+      -ms-text-shadow: $value;
+          text-shadow: $value;
+}
+
+//フォントサイズ
+@mixin font-size($s:1.4) {
+    font-size:($s * 10) + px;
+    font-size:$s + rem;
+}
+
+@mixin bgsize($size){
+	-webkit-background-size: $size;
+	     -o-background-size: $size;
+	        background-size: $size;
+}
+
+// ===================================================================
+// extend
+// ===================================================================
+@if $use_extend_object {
+/* 汎用クラス */
+
+	// リストマーカー
+	[class^="mark"] {
+		padding-left: 15px;
+		background: no-repeat left .5em;
+	}
+	@for $i from 1 through 5 {
+		.mark#{$i} {
+			background-image: url(#{$img_path}share/mark_#{$i}.gif);
+		}
+	}
+
+	// 簡易ロールオーバー
+	@if $opacity_value {
+		.opacity {
+			opacity: $opacity_value;
+			-moz-opacity: $opacity_value;
+			filter: alpha(opacity=#{$opacity_value * 100});
+			-ms-filter: "alpha(opacity=#{$opacity_value * 100})";
+		}
+	}
+
+	.icoTtl{
+		position: relative;
+		text-align: center;
+		font-weight: normal;
+		font-family: $en_font;
+		margin-bottom: 60px;
+		span{
+			border: 1px solid $font_color;
+			@include border-radius(50%);
+			@include inline-block;
+			width: 32px;
+			line-height: 30px;
+			text-align: center;
+			margin-right: 15px;
+		  font-family: $base_font;
+		}
+		i{
+			@include font-size(2.5);
+		  vertical-align: middle;
+		}
+		&::before {
+			position: absolute;
+			left: 47%;
+		  width: 7%;
+			height: 1px;
+			background: $main_color;
+			content: '';
+			bottom: -10px;
+		}
+	}
+
+	a.button {
+	  line-height: 32px;
+	  -webkit-perspective: 300px;
+	  -moz-perspective: 300px;
+	  perspective: 300px;
+	  text-align: center;
+	  color: #FFF!important;
+	  span {
+	    position: relative;
+	    display: inline-block;
+	    padding: 0 40px;
+	    background: $main_color;
+	    @include transition(all 0.3s ease);
+	    @include transform-origin( 50%,0);
+	    @include transform-style(preserve-3d);
+	    &::before {
+	      position: absolute;
+	      top: 100%;
+	      left: 0;
+	      width: 100%;
+	      height: 100%;
+	      background: $main_color;
+	      content: attr(data-hover);
+	      -webkit-transition: background 0.3s;
+	      -moz-transition: background 0.3s;
+	      transition: background 0.3s;
+	      @include transform(rotateX(-90deg));
+	      -webkit-transform-origin: 50% 0;
+	      -moz-transform-origin: 50% 0;
+	      transform-origin: 50% 0;
+	    }
+	  }
+	  &:hover span, &:focus span {
+	    -webkit-transform: rotateX(90deg) translateY(-22px);
+	    -moz-transform: rotateX(90deg) translateY(-22px);
+	    transform: rotateX(90deg) translateY(-22px);
+	  }
+	  &:hover span::before, &:focus span::before {
+	    background: #008be4;
+	  }
+	}
+
+	.hide{
+		display: none;
+	}
+
+	.imgArea{
+		overflow: hidden;
+	}
+
+	// inline-block
+	.inline_block {
+		display: inline-block;
+		*display: inline;
+		*zoom: 1;
+	}
+
+	// table-cell
+	.table_cell {
+		display: table-cell;
+		*display: inline;
+		*zoom: 1;
+		vertical-align: middle;
+	}
+	.ovfl {
+		overflow:hidden;
+	}
+	// float: right
+	.fr,
+	.imgR,
+	.alignright {
+		float: right;
+		margin-left: 10px;
+	}
+
+	// float: left
+	.fl,
+	.imgL,
+	.alignleft{
+		float: left;
+		margin-right: 10px;
+	}
+
+	// text-align: center
+	.imgC,
+	.tC,
+	.btn,
+	.aligncenter {
+		text-align: center;
+	}
+	
+	// img Centering
+	.imgC,
+	.aligncenter {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	// text-align: right
+	.tR,
+	.sign {
+		text-align: right;
+	}
+
+	// box-sizing
+	.box_size {
+		@each $prefix in $set_prefix {
+			#{$prefix}box-sizing: border-box;
+		}
+	}
+
+	// text-shadow none
+	.ts_none {
+		@each $prefix in $set_prefix {
+			#{$prefix}text-shadow: none !important;;
+		}
+	}
+
+	// box-shadow none
+	.bs_none {
+		@each $prefix in $set_prefix {
+			#{$prefix}box-shadow: none !important;;
+		}
+	}
+
+
+	// 余白調整用のクラス
+	@if $use_spacing_classes {
+		@for $i from 0 through 20 {
+			.mt#{$i * 5} { margin-top: 5px * $i !important; }
+			.mb#{$i * 5} { margin-bottom: 5px * $i !important; }
+			.pt#{$i * 5} { padding-top: 5px * $i !important; }
+			.pb#{$i * 5} { padding-bottom: 5px * $i !important; }
+		}
+	}
+
+}
+
+/* clearfix */
+.clearfix {
+	*zoom: 1;
+	&:after {
+		content: ".";
+		display: block;
+		clear: both;
+		height: 0;
+		visibility: hidden;
+	}
+}

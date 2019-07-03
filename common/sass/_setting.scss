@@ -1,0 +1,72 @@
+@charset "utf-8";
+// ===================================================
+// 設定
+// ===================================================
+
+
+// HTML5の場合は値を「false」から「true」にする
+$use_html5: true;
+
+
+// 汎用クラスを使用するか
+$use_extend_object: true;
+
+	// 簡易ロールオーバーの値
+	$opacity_value: .7;
+
+	// 余白調整用のクラスを使用するか
+	$use_spacing_classes: false;
+
+
+// 画像のパス
+$img_path: "../../img/";
+$img_path2: "../img/";
+
+
+// ベースフォント
+$base_font: "メイリオ", "Meiryo", verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "ＭＳ Ｐゴシック", "MS PGothic", Sans-Serif;
+$base_font_ie: "ＭＳ Ｐゴシック", "MS PGothic", Sans-Serif;
+$min_font: "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro","ＭＳ Ｐ明朝", "MS PMincho", serif;
+$en_font: 'Quicksand', sans-serif;
+// ページ全体の横幅
+$base_width: 960px;
+//サイド横幅
+$side_width:230px;
+//メイン横幅
+$main_width:700px;
+
+// 要素の基本下マージン
+$base_margin_bottom: 20px;
+
+
+// メインカラー（ベースカラー）
+$main_color: #0077c3;
+
+// サブカラー
+$sub_color: #eee;
+
+// アクセントカラー
+$accent_color: #e73562;
+
+
+// ベーステキストカラー
+$font_color: #555;
+
+
+// ベースリンクカラー
+$link_color: $font_color;
+$link_color_visited: $font_color;
+$link_color_hover: $font_color;
+$link_color_active: $font_color;
+
+
+// 付与するベンダープレフィックス
+$set_prefix: -webkit-, -moz-, -ms-, -o-, '';
+
+
+// 角丸の初期値
+$br_value: 3px;
+
+//フォームボタン
+$submit_width:185px;
+$submit_height:45px;

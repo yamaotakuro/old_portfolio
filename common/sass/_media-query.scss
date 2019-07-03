@@ -1,0 +1,50 @@
+@if $type == lg{
+
+}
+@if $type == md{
+
+}
+@if $type == md or $type == lg{ 
+	
+}
+
+
+@if $type == sm{ 
+	
+
+}
+
+@if $type == xs{
+	.xs-center{
+		text-align: center!important;	
+	}
+	#header{
+		.navi{
+			text-align: center;
+			li{
+				@include font-size(1.1);
+				margin-left: 15px;
+			}
+		}
+		.logo{
+
+			h1{
+				@include font-size(3);
+			}
+			h2{
+				@include font-size(2);
+			}
+		}
+	}
+	#index{
+		#sec01{
+			.aboutImg{
+				margin-top: 30px;
+				text-align: center;
+			}
+		}
+	}
+	#works{
+		padding: 5px;
+	}
+}
